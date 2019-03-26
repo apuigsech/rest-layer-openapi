@@ -116,7 +116,7 @@ var staticComponents = openapi3.Components{
 				Schema: &openapi3.SchemaRef{
 					Value: &openapi3.Schema{
 						Type:   "string",
-						Format: "date-time",
+						//Format: "date-time",
 					},
 				},
 			},
@@ -170,23 +170,47 @@ var staticComponents = openapi3.Components{
 							Type:        "string",
 						},
 					},
-					// TODO: complete
+					/* TODO: complete
 					"issues": &openapi3.SchemaRef{
 						Value: &openapi3.Schema{
 							Description: "Error message",
-							Type:        "object",
+							Type:        "array",
+							Items: &openapi3.SchemaRef{
+								Value: &openapi3.Schema{
+									Type: "string",
+								},
+							},
 						},
 					},
+					*/
 				},
 			},
 		},
 	},
 	Responses: map[string]*openapi3.ResponseRef{
 		"Error": &openapi3.ResponseRef{
-			Ref: "#/components/schemas/Error",
+			Value: &openapi3.Response{
+				Description: "Error",
+				Content: map[string]*openapi3.MediaType{
+					"application/json": &openapi3.MediaType{
+						Schema: &openapi3.SchemaRef{
+							Ref: "#/components/schemas/Error",
+						},
+					},
+				},
+			},
 		},
 		"ValidationError": &openapi3.ResponseRef{
-			Ref: "#/components/schemas/ValidationError",
+			Value: &openapi3.Response{
+				Description: "Validation Error",
+				Content: map[string]*openapi3.MediaType{
+					"application/json": &openapi3.MediaType{
+						Schema: &openapi3.SchemaRef{
+							Ref: "#/components/schemas/ValidationError",
+						},
+					},
+				},
+			},
 		},
 	},
 }
