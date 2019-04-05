@@ -95,7 +95,7 @@ var staticComponents = openapi3.Components{
 				Schema: &openapi3.SchemaRef{
 					Value: &openapi3.Schema{
 						Type:   "string",
-						Format: "date-time",
+						//Format: "date-time",
 					},
 				},
 			},

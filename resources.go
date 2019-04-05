@@ -33,10 +33,11 @@ func addResource(doc *openapi3.Swagger, prevRscList []*resource.Resource, rsc *r
 	var operationSufix string
 	var params []*openapi3.ParameterRef
 	for _, prevRsc := range prevRscList {
+		prevSchemaNamePlural := prevRsc.Name()
 		prevSchemaNameSingular := inflection.Singular(prevRsc.Name())
 		prevSchemaIdParameter := prevSchemaNameSingular + "Id"
 
-		path = path + fmt.Sprintf("/%s/{%s}", prevSchemaNameSingular, prevSchemaIdParameter)
+		path = path + fmt.Sprintf("/%s/{%s}", prevSchemaNamePlural, prevSchemaIdParameter)
 		operationSufix = operationSufix + fmt.Sprintf("On%s", strings.Title(prevSchemaNameSingular))
 
 		param := &openapi3.ParameterRef{
@@ -121,14 +122,9 @@ func addResource(doc *openapi3.Swagger, prevRscList []*resource.Resource, rsc *r
 						Content: map[string]*openapi3.MediaType{
 							"application/json": &openapi3.MediaType{
 								Schema: &openapi3.SchemaRef{
-									Value: &openapi3.Schema{
-										Type: "array",
-										Items: &openapi3.SchemaRef{
-											Ref: fmt.Sprintf("#/components/schemas/%s", schemaNameSingular),
-										},
-									},
+									Ref: fmt.Sprintf("#/components/schemas/%s", schemaNameSingular),
 								},
-							},
+							},					
 						},
 					},
 				},
