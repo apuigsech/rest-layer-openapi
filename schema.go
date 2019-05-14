@@ -1,6 +1,7 @@
 package openapi
 
 import (
+	"os"
 	"fmt"
 	"reflect"
 	"github.com/rs/rest-layer/schema"
@@ -31,7 +32,7 @@ func generateSchemaFromField(field schema.Field) *openapi3.Schema {
 	case *schema.Reference:
 		return generateSchemaFromFieldReference(field)
 	default:
-		fmt.Println("TYPE > ", reflect.TypeOf(t))
+		fmt.Fprintln(os.Stderr, "Unsupported Type:", reflect.TypeOf(t))
 		return nil
 	}
 	return nil
