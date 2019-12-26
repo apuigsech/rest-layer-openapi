@@ -5,7 +5,7 @@ import (
 	"github.com/rs/rest-layer/resource"
 )
 
-func NewOpenapiFromIndex(index resource.Index, info openapi3.Info) *openapi3.Swagger {
+func NewOpenapiFromIndex(index resource.Index, info *openapi3.Info) *openapi3.Swagger {
 	doc := &openapi3.Swagger{
 		OpenAPI:    "3.0.0",
 		Info:       info,
